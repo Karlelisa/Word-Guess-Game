@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Word-Guess-Game</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/javascript/game.js"></script>
+
+</head>
+
+<body onload="startUp()">
+
+    <!--     <div class="row">
+        <div class="col-sm-12">
+            <nav class="navbar navbar-light bg-light" id="goldNav"></nav>
+        </div>
+    </div> -->
+
+
+    <div class="row" id="black-backgrnd">
+        <div class="col-md-3">
+            <p></p>
+        </div>
+
+        <div class="col-md-6">
+            <div class="text-center">
+                <img src="assets/images/mj-pic.jpg" class="img-fluid" alt="Responsive image" height="500px"
+                    width="600px">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <p></p>
+        </div>
+    </div>
+
+
+
+    <!--  <nav class="navbar navbar-light bg-light" id="navbar">
+        <a class="navbar-brand" href="#">
+            <img src="assets/images/mj-pic.jpg" class="img-fluid" alt="Responsive image" height="500px" width="500px">
+        </a>
+    </nav> -->
+
+
+
+    <div id="game">
+        <div class="row">
+            <div class="col-md-3">
+                <p></p>
+            </div>
+            <br>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2> Name That Micheal Jackson Song!</h2>
+                        <h2>Guess a letter</h2>
+
+                        <br>
+                        <p id="answer"></p>
+                        <input id="letter" type="text">
+                        <input type="button" value="letter" onClick="letter()">
+                        <p id="counter"></p>
+                        <p id="stat"></p>
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <p></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <p></p>
+        </div>
+        <br>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2> Name That Micheal Jackson Song!</h2>
+                    <h2>Guess a letter</h2>
+
+                    <br>
+                    <p id="answer"></p>
+                    <input id="letter" type="text">
+                    <input type="button" value="Submit guess" onClick="ranletter()">
+                    <p id="counter"></p>
+                    <p id="stat"></p>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!--https://getbootstrap.com/docs/4.3/utilities/position/-->
+    <div class="fixed-bottom">
+        <div class="sticky-bottom">
+            <div class="row">
+                <div class="col-sm-12">
+                    <!--https://getbootstrap.com/docs/4.3/components/card/-->
+                    <div class="card-footer" class="footer">
+                        <small class="text-muted"></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+</html>
