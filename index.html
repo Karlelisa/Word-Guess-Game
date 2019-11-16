@@ -7,47 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Word-Guess-Game</title>
 
+
+
+    <!-- javascript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/javascript/game.js"></script>
+    <script src="./assets/javascript/game.js"></script>
+
 
 </head>
 
-<body onload="startUp()">
-
-    <!--     <div class="row">
-        <div class="col-sm-12">
-            <nav class="navbar navbar-light bg-light" id="goldNav"></nav>
-        </div>
-    </div> -->
-
-
-    <div class="row" id="black-backgrnd">
-        <div class="col-md-3">
-            <p></p>
-        </div>
-
-        <div class="col-md-6">
-            <div class="text-center">
-                <img src="assets/images/mj-pic.jpg" class="img-fluid" alt="Responsive image" height="500px"
-                    width="600px">
-            </div>
-        </div>
-        <div class="col-md-3">
-            <p></p>
-        </div>
-    </div>
-
-
-
-    <!--  <nav class="navbar navbar-light bg-light" id="navbar">
-        <a class="navbar-brand" href="#">
-            <img src="assets/images/mj-pic.jpg" class="img-fluid" alt="Responsive image" height="500px" width="500px">
-        </a>
-    </nav> -->
-
-
+<body onload="hangman()">
 
     <div id="game">
         <div class="row">
@@ -58,16 +34,25 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h2> Name That Micheal Jackson Song!</h2>
-                        <h2>Guess a letter</h2>
+                        <h1>Tropical Island Hangman</h1>
+                        <hr>
+                        <h3 id="tropical"> What is the name of this tropical island?</h3>
+                        <h3>Guess a letter</h3>
 
                         <br>
-                        <p id="answer"></p>
-                        <input id="letter" type="text">
-                        <input type="button" value="letter" onClick="letter()">
-                        <p id="counter"></p>
-                        <p id="stat"></p>
+                        <!-- Cited: https://jsfiddle.net/phollott/x29ym2ag/ -->
+                        <form id="hangman">
+                            <input type="text" maxlength="1" minlength="1" name="letter" id="letter"
+                                placeholder="Guess a letter" />
+                            <input id="guess" name="guess" type="submit" value="Submit Your Letter" />
+                            <button id="restart" name="restart" type="button">Restart</button>
+                        </form>
 
+                        <br>
+
+                        <ul id="letters"></ul>
+                        <h5 id="man"></h5>
+                        <p id="output" class="output"></p>
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -77,35 +62,6 @@
 
         </div>
     </div>
-
-
-    <div class="row">
-        <div class="col-md-3">
-            <p></p>
-        </div>
-        <br>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h2> Name That Micheal Jackson Song!</h2>
-                    <h2>Guess a letter</h2>
-
-                    <br>
-                    <p id="answer"></p>
-                    <input id="letter" type="text">
-                    <input type="button" value="Submit guess" onClick="ranletter()">
-                    <p id="counter"></p>
-                    <p id="stat"></p>
-
-                </div>
-            </div>
-            <div class="col-md-3">
-                <p></p>
-            </div>
-        </div>
-    </div>
-
-
 
 
     <!--https://getbootstrap.com/docs/4.3/utilities/position/-->

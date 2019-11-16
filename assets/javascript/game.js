@@ -1,89 +1,144 @@
-
-/* 
-
-let wordGuess = {
-    "_" "_" "_" "_" "_" "_" : "Hawaii";
-    "_" "_" "_" "_" : "Fiji";
-    "_" "_" "_" "_" "_" : "Aruba" ;
-    "_" "_" "_" "_" "_" "_" "_" : "Bahamas";
-    "_" "_" "_" "_" "_" "_" "_" : "Jamaica";
- }
- */
+/* let randomWords = ["thriller", "beat it", "pretty young thing", "billie jean", "the way you make me feel", "remember the time", "smooth criminal",
+    "dirty diana", "you rock my world", "the girl is mine", "rock with you"]; */
 
 
 
-
-let randomWords = ["thriller", "beat it", "pretty young thing", "billie jean", "the way you make me feel", "remember the time", "smooth criminal",
-    "dirty diana", "you rock my world", "the girl is mine", "rock with you"];
-
-let computerChoice = randomWords[Math.floor(Math.random() * randomWords.length)];
-
-/* 
-document.onkeyup = function () {
-    let userGuess = String.fromCharCode(event.keyCode).
-        toLowerCase();
-
-    console.log(userGuess);
+// let randomWords = ["Hawaii", "Bahamas", "Bermuda", "Aruba", "Jamaica", "Antigua", "Barbados", "Curacao", "Anguilla", "Fiji", "Grenada"]
 
 
-    let computerChoice = randomWords[Math.floor(Math.random() * randomWords.length)];
+// let computerChoice = randomWords[Math.floor(Math.random() * randomWords.length)];
 
-    console.log(computerChoice);
+// Cited: https://jsfiddle.net/phollott/x29ym2ag/
 
-} */
+function hangman() {
+    "use strict";
+    let availableLetters, words, guessInput, guess, guessButton, lettersGuessed, lettersMatched, output, man, letters, lives, currentWord, numLettersMatched, messages;
 
-// Cited: https://youtu.be/tbLCMFp9QK4
-//Simple hangman game
+    function setup() {
+        /* start config options */
+        availableLetters = "abcdefghijklmnopqrstuvwxyz";
+        lives = 5;
+        words = ["hawaii", "bahamas", "bermuda", "aruba", "jamaica", "antigua", "barbados", "curacao", "anguilla", "fiji", "renada"]
+        messages = {
+            win: 'You win!',
+            lose: 'Game over!',
+            guessed: ' already guessed, please try again...',
+            validLetter: 'Please enter a letter from A-Z'
+        };
+        /* end config options */
 
-let m;
-let count = 0;
-let answerArray = [];
-let guessesLeft = 10;
-document.getElementById("guesses-left").innerHTML = guessesLeft;
+        lettersGuessed = lettersMatched = '';
+        numLettersMatched = 0;
 
-// This code automatically sets the random word with its corresponding "_".
-function startUp() {
+        /* choose a random word */
+        currentWord = words[Math.floor(Math.random() * words.length)];
 
-    for (let i = 0; i < computerChoice.length; i++) {
-        answerArray[i] = "_";
+        /* make #man and #output blank, create varibles for later access */
+        output = document.getElementById("output");
+        man = document.getElementById("man");
+        guessInput = document.getElementById("letter");
+
+        man.innerHTML = 'You have ' + lives + ' lives remaining';
+        output.innerHTML = '';
+
+        document.getElementById("letter").value = '';
+
+        /* make sure guess button is enabled */
+        guessButton = document.getElementById("guess");
+        guessInput.style.display = 'inline';
+        guessButton.style.display = 'inline';
+
+        /* set up display of letters in current word */
+        letters = document.getElementById("letters");
+        letters.innerHTML = '<li class="current-word">Current word:</li>';
+
+        let letter, i;
+        for (i = 0; i < currentWord.length; i++) {
+            letter = '<li class="letter letter' + currentWord.charAt(i).toUpperCase() + '">' + currentWord.charAt(i).toUpperCase() + '</li>';
+            letters.insertAdjacentHTML('beforeend', letter);
+        }
     }
 
-    m = answerArray.join(" ");
-    document.getElementById("answer").innerHTML = m;
+    function gameOver(win) {
+        if (win) {
+            output.innerHTML = messages.win;
+            output.classList.add('win');
+        } else {
+            output.innerHTML = messages.lose;
+            output.classList.add('error');
+        }
 
-}
+        guessInput.style.display = guessButton.style.display = 'none';
+        guessInput.value = '';
+    }
 
-startUp();
+    /* Start game */
+    window.onload = setup();
 
-function letter() {
-    let letter = document.getElementById("letter").value;
+    /* buttons */
+    document.getElementById("restart").onclick = setup;
 
-    if (letter.length > 0) {
-        for (let i = 0; 1 < computerChoice.length; i++) {
-            if (computerChoice[i] === letter) {
+    /* reset letter to guess on click */
+    guessInput.onclick = function () {
+        this.value = '';
+    };
 
-                answerArray[i] = letter;
+    /* main guess function when user clicks #guess */
+    document.getElementById('hangman').onsubmit = function (e) {
+        if (e.preventDefault) e.preventDefault();
+        output.innerHTML = '';
+        output.classList.remove('error', 'warning');
+        guess = guessInput.value;
+
+        /* does guess have a value? if yes continue, if no, error */
+        if (guess) {
+            /* is guess a valid letter? if so carry on, else error */
+            if (availableLetters.indexOf(guess) > -1) {
+                /* has it been guessed (missed or matched) already? if so, abandon & add notice */
+                if ((lettersMatched && lettersMatched.indexOf(guess) > -1) || (lettersGuessed && lettersGuessed.indexOf(guess) > -1)) {
+                    output.innerHTML = '"' + guess.toUpperCase() + '"' + messages.guessed;
+                    output.classList.add("warning");
+                }
+                /* does guess exist in current word? if so, add to letters already matched, if final letter added, game over with win message */
+                else if (currentWord.indexOf(guess) > -1) {
+                    let lettersToShow;
+                    lettersToShow = document.querySelectorAll(".letter" + guess.toUpperCase());
+
+                    for (let i = 0; i < lettersToShow.length; i++) {
+                        lettersToShow[i].classList.add("correct");
+                    }
+
+                    /* check to see if letter appears multiple times */
+                    for (let j = 0; j < currentWord.length; j++) {
+                        if (currentWord.charAt(j) === guess) {
+                            numLettersMatched += 1;
+                        }
+                    }
+
+                    lettersMatched += guess;
+                    if (numLettersMatched === currentWord.length) {
+                        gameOver(true);
+                    }
+                }
+                /* guess doesn't exist in current word and hasn't been guessed before, add to lettersGuessed, reduce lives & update user */
+                else {
+                    lettersGuessed += guess;
+                    lives--;
+                    man.innerHTML = 'You have ' + lives + ' lives remaining';
+                    if (lives === 0) gameOver();
+                }
+            }
+            /* not a valid letter, error */
+            else {
+                output.classList.add('error');
+                output.innerHTML = messages.validLetter;
             }
         }
-        count++;
-        document.getElementById("counter").innerHTML = "No of clicks: " + count;
-        ("#game").click(function () {
-            alert("I've been clicked!");
+        /* no letter entered, error */
+        else {
+            output.classList.add('error');
+            output.innerHTML = messages.validLetter;
         }
-        document.getElementById("answer").innerHTML = answerArray.join(" ");
-
-    }
-    if (count > 5) {
-        document.getElementById("stat").innerHTML = "Come on - you should've guessed it by now";
-    }
-}
-
-letter();
-
-
-
-
-
-
-
-
+        return false;
+    };
+};
