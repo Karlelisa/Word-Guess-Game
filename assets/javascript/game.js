@@ -18,7 +18,7 @@ function hangman() {
         /* start config options */
         availableLetters = "abcdefghijklmnopqrstuvwxyz";
         lives = 5;
-        words = ["hawaii", "bahamas", "bermuda", "aruba", "jamaica", "antigua", "barbados", "curacao", "anguilla", "fiji", "renada"]
+        words = ["hawaii", "bahamas", "bermuda", "aruba", "jamaica", "antigua", "barbados", "curacao", "anguilla", "fiji", "grenada"]
         messages = {
             win: 'You win!',
             lose: 'Game over!',
@@ -63,9 +63,11 @@ function hangman() {
         if (win) {
             output.innerHTML = messages.win;
             output.classList.add('win');
+            output.innerHTML = ("<h5> You Win!! That's Correct. The Answer was: " + currentWord + "</h5>");
         } else {
             output.innerHTML = messages.lose;
             output.classList.add('error');
+            output.innerHTML = ("<h5> Game Over!! The Correct Answer was: " + currentWord + "</h5>");
         }
 
         guessInput.style.display = guessButton.style.display = 'none';
@@ -99,6 +101,7 @@ function hangman() {
                     output.innerHTML = '"' + guess.toUpperCase() + '"' + messages.guessed;
                     output.classList.add("warning");
                 }
+
                 /* does guess exist in current word? if so, add to letters already matched, if final letter added, game over with win message */
                 else if (currentWord.indexOf(guess) > -1) {
                     let lettersToShow;
@@ -126,6 +129,7 @@ function hangman() {
                     lives--;
                     man.innerHTML = 'You have ' + lives + ' lives remaining';
                     if (lives === 0) gameOver();
+
                 }
             }
             /* not a valid letter, error */
