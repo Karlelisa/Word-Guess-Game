@@ -45,6 +45,7 @@ h3 {
     border-bottom: 1px solid black;
     text-align: center;
     color: white;
+
 }
 
 .current-word {
@@ -52,6 +53,7 @@ h3 {
     color: teal;
     font-weight: bold;
     font-size: 20px;
+    margin-left: -40px;
 }
 
 .output {
