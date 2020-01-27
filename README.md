@@ -1,5 +1,5 @@
 # Word-Guess-Game
-## Trpoical Island Hangman
+# Tropical Island Hangman
 
 ### Description
 Choose a theme for your game.  
@@ -24,6 +24,13 @@ After the user wins/loses the game should automatically choose another word and 
 
 ### Built With
 HTML, CSS, Bootstrap, jQuery, JavaScript
+
+
+### GitHub Published Link
+Click on the below link to play.
+
+https://karlelisa.github.io/Word-Guess-Game/
+
 
 ### Game Screenshot
 ![My Tropial Island Hangman Cover Page](/assets/images/my-tropical-hangman-cover-page.png)
